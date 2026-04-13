@@ -1,0 +1,25 @@
+nav {
+  transition: opacity 100ms;
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 720px;
+}
+
+.verse-number {
+  cursor: pointer;
+  font-size: 12px;
+  position: relative;
+  top: -4px;
+}
+
+#books .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  will-change: auto;
+  max-height: calc(50vh);
+}

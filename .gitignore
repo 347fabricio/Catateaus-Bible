@@ -1,0 +1,42 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Environment Variables (CRITICAL)
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Build Artifacts (TypeScript)
+# =========================
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# =========================
+# Logs and Debugging
+# =========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Prisma specific
+# =========================
+data/generated/
+
+# =========================
+# OS & Editor Files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+todo.md
