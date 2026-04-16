@@ -1,5 +1,5 @@
-import { getChapter } from "../services/api.js";
-import { hideNavigation } from "../../assets/js/header.js";
+import { getChapter } from "../../services/api.js";
+import { hideNavigation } from "../header.js";
 
 /**
  * Busca os versículos de um capítulo específico na API, ordena-os e os renderiza no DOM.
@@ -12,10 +12,11 @@ export async function buildVerses(bookId, chapterId) {
   const chapter = await getChapter(bookId, chapterId);
   chapter.sort((a, b) => a.verse - b.verse);
 
-  const parent = document.querySelector("#verses div");
+  const parent = document.querySelector("#verses");
   const versesTemplate = parent.querySelector(".verseTemplate");
 
   const nonTemplate = parent.querySelectorAll("div");
+
   nonTemplate.forEach((el) => el.remove());
 
   const navDiv = document.querySelector("#navDiv");
@@ -31,14 +32,15 @@ export async function buildVerses(bookId, chapterId) {
 
     verseNumber.classList.add("pe-1");
 
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("mb-2");
+    const div = document.createElement("div");
+    div.classList.add("mb-2");
 
-    newDiv.appendChild(verseNumber);
-    newDiv.appendChild(verseText);
-    parent.append(newDiv);
+    div.appendChild(verseNumber);
+    div.appendChild(verseText);
+
+    parent.appendChild(div);
   });
 
   const lastDiv = parent.querySelectorAll("div");
-  if (lastDiv.length > 0) lastDiv[lastDiv.length - 1].classList.replace("mb-2", "mb-4");
+  if (lastDiv.length > 0) lastDiv[lastDiv.length - 1].removeAttribute("class");
 }

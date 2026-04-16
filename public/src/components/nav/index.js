@@ -3,13 +3,14 @@ import { fixBootstrapDropdownScroll } from "../../lib/utils.js";
 import { populateBooksList, setupBookSelection } from "./books.js";
 import { setupVersionSelection } from "./versions.js";
 import { setupMainButtonToggle } from "./uiToggles.js";
+import { pushBooks, pullBooks } from "../../services/localStorage.js";
 
 /**
  * Função de inicialização principal (Entry Point) do componente de navegação.
  * Centraliza e dispara a configuração de livros, capítulos e versões.
  */
 export async function populateNav() {
-  const bibleBooks = await getBooks();
+  const bibleBooks = pullBooks() || (await getBooks());
   const bibleVersions = await getVersions();
 
   const booksEl = document.querySelector("#books");

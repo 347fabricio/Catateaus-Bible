@@ -1,7 +1,7 @@
 import { prisma } from "../public/src/lib/prisma.js";
 
-import { getBookSQL } from "../services/getBookSQL.js";
-import { getVersesSQL } from "../services/getVersesSQL.js";
+import { getBookSQL } from "../public/assets/js/scrapper/getBookSQL.js";
+import { getVersesSQL } from "../public/assets/js/scrapper/getVersesSQL.js";
 
 async function main() {
   // Create BKJ version

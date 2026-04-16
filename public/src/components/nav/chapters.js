@@ -1,5 +1,7 @@
-import { buildVerses } from "../verses.js";
-import { getChapter } from "../../services/api.js";
+import { buildVerses } from "../verses/verses.js";
+import { getChapter, getChapters } from "../../services/api.js";
+import { pagination } from "../verses/pagination.js";
+import { pushChapters } from "../../services/localStorage.js";
 
 /**
  * Adiciona ouvintes de eventos (event listeners) aos botões de capítulos gerados dinamicamente.
@@ -24,12 +26,20 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
 
       chaptersEl.classList.add("d-none");
 
+      HideWelcomeScreen();
+
       const bookId = booksEl.dataset.bookId;
       buildVerses(bookId, chapterId);
 
       clearChapters(chaptersEl);
+      pagination();
     });
   });
+}
+
+function HideWelcomeScreen() {
+  const welcomeScr = document.querySelector("#welcome-screen");
+  welcomeScr.classList.add("d-none");
 }
 
 /**
@@ -42,6 +52,8 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
 export async function fetchAndRenderChapters(bookId, bookName, chaptersEl, booksEl) {
   const response = await getChapter(bookId, 999);
   const howManyChapters = response[0].chapter;
+
+  await getChapters(bookId);
 
   renderChapterGrid(howManyChapters, chaptersEl);
   setupChapterSelection(chaptersEl, booksEl, bookName);

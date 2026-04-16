@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
 body {
   font-family: "Times New Roman", Times, serif;
   font-optical-sizing: auto;
@@ -5,13 +7,28 @@ body {
   font-style: normal;
 }
 
-/* .header {
-  transition: opacity 100ms;
-} */
-
-#chevronDiv {
+#chevronDiv,
+#chevronLeft,
+#chevronRight {
   cursor: pointer;
-  width: 100px;
+  width: fit-content;
+  height: fit-content;
+}
+
+#chevronLeft svg,
+#chevronRight svg {
+  transition:
+    transform 0.1s ease,
+    opacity 0.1s ease;
+}
+
+#chevronLeft:active svg,
+#chevronRight:active svg {
+  transform: scale(0.9);
+}
+
+#verses {
+  transition: opacity 0.3s ease;
 }
 
 .bi-chevron-compact-down {
@@ -19,10 +36,6 @@ body {
     transform 0.3s ease,
     opacity 0.3s ease;
   transform: rotate(180deg);
-}
-
-.bi-chevron-compact-down:active {
-  transform: scale(0.9);
 }
 
 #navDiv {
@@ -49,7 +62,7 @@ body {
   pointer-events: all;
 }
 
-.container-fluid {
+#verses {
   margin-right: auto;
   margin-left: auto;
   max-width: 720px;
@@ -70,7 +83,3 @@ body {
   will-change: auto;
   max-height: calc(50vh);
 }
-
-/* #verses {
-  margin: 70px auto;
-} */

@@ -1,3 +1,5 @@
+import { pushBooks, pushChapters } from "./localStorage.js";
+
 const api = "http://10.0.0.201:3000/api";
 
 export async function getChapter(bookId, chapterId) {
@@ -27,6 +29,7 @@ export async function getChapters(bookId) {
     }
 
     const response = await request.json();
+    pushChapters(bookId, response);
 
     return response;
   } catch (error) {
@@ -61,6 +64,8 @@ export async function getBooks() {
     }
 
     const response = await request.json();
+
+    pushBooks(response);
 
     return response;
   } catch (error) {
