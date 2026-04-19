@@ -55,6 +55,6 @@ export function populateBooksList(dropdownMenu, templateItem, booksData) {
  * @param {string} bookName - O nome do livro selecionado.
  * @param {number|string} chapterId - O capítulo do livro selecionado.
  */
-export function updateBookButton(booksEl, bookName, chapterId) {
-  booksEl.querySelector("button").textContent = `${bookName} ${chapterId}`;
+export function updateBookButton(bookName, chapterId) {
+  document.querySelector("#books button").textContent = `${bookName} ${chapterId}`;
 }

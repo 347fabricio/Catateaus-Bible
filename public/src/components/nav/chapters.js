@@ -14,10 +14,10 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
   const chapterButtons = chaptersEl.querySelectorAll(".col:not(.d-none) button");
 
   chapterButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       const chapterId = e.target.textContent.trim();
       booksEl.dataset.chapterId = chapterId;
-      updateBookButton(booksEl, bookName, chapterId);
+      updateBookButton(bookName, chapterId);
 
       const dropdownToggle = booksEl.querySelector(".dropdown-toggle");
       const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownToggle);
@@ -30,7 +30,7 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
       HideWelcomeScreen();
 
       const bookId = booksEl.dataset.bookId;
-      buildVerses(bookId, chapterId);
+      await buildVerses(bookId, chapterId);
 
       clearChapters(chaptersEl);
       pagination();
