@@ -42,12 +42,12 @@ export function pullChapters(bookId) {
  */
 export function pushChapters(bookId, chaptersArray) {
   const storedChapters = localStorage.getItem(CHAPTERS_STORAGE_KEY);
-  const allChapters = storedChapters ? JSON.parse(storedChapters) : {};
+  let allChapters = storedChapters ? JSON.parse(storedChapters) : {};
 
   if (Object.keys(allChapters).includes(bookId)) return;
 
   let sortedBooks, oldestBooks;
-  if (Object.keys(allChapters).length >= 5) {
+  if (Object.keys(allChapters).length >= 4) {
     sortedBooks = Object.entries(allChapters)
       .map((book) => ({
         bId: book[0],
@@ -55,7 +55,7 @@ export function pushChapters(bookId, chaptersArray) {
       }))
       .sort((a, b) => b.timestamp - a.timestamp);
 
-    oldestBooks = sortedBooks.slice(0, 5);
+    oldestBooks = sortedBooks.slice(0, 4);
 
     const booksToKeep = oldestBooks.map((b) => b.bId);
     Object.keys(allChapters).forEach((bId) => {
@@ -70,6 +70,14 @@ export function pushChapters(bookId, chaptersArray) {
   });
 
   allChapters[bookId] = chaptersArray;
+
+  // Sorts cached books by the timestamp (oldest to newest)
+  // Timestamp is recorded each time a book is fetched
+  // console.log(
+  //   Object.entries(allChapters).sort((a, b) => {
+  //     return a[1].at(-1).timestamp - b[1].at(-1).timestamp;
+  //   }),
+  // );
 
   localStorage.setItem(CHAPTERS_STORAGE_KEY, JSON.stringify(allChapters));
 }

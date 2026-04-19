@@ -33,7 +33,7 @@ export function setupBookSelection(booksEl, dropdownMenu, chaptersEl) {
  * Clona o modelo (template) para renderizar a lista de livros e, em seguida, remove o modelo original.
  * @param {HTMLElement} dropdownMenu - O contêiner do menu suspenso onde os livros serão adicionados.
  * @param {HTMLElement} templateItem - O elemento `li` usado como modelo para clonagem.
- * @param {Array<Object>} booksData - O array contendo os objetos de dados dos livros (ex: bibleBooks).
+ * @param {Array<Object>} booksData - O array contendo os objetos de dados dos livros da Bíblia.
  */
 export function populateBooksList(dropdownMenu, templateItem, booksData) {
   booksData.forEach((book, index) => {
@@ -47,4 +47,14 @@ export function populateBooksList(dropdownMenu, templateItem, booksData) {
   });
 
   templateItem.querySelector("button").classList.add("fw-bold");
+}
+
+/**
+ * Atualiza o texto do botão de navegação principal para exibir o livro e o capítulo atuais
+ * @param {HTMLElement} booksEl - O contêiner principal do componente de livros.
+ * @param {string} bookName - O nome do livro selecionado.
+ * @param {number|string} chapterId - O capítulo do livro selecionado.
+ */
+export function updateBookButton(booksEl, bookName, chapterId) {
+  booksEl.querySelector("button").textContent = `${bookName} ${chapterId}`;
 }

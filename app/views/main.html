@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/images/bible.svg" type="image/x-icon" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,7 +14,7 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/styles/main.css" />
-    <title>Spawn</title>
+    <title>Catateau's Biblie</title>
   </head>
   <body>
     <div class="sticky-top bg-white">
@@ -61,7 +62,7 @@
       </div>
     </div>
 
-    <div id="welcome-screen" class="z-n1 position-absolute top-50 start-50 translate-middle w-100">
+    <div id="welcomeScreen" class="z-n1 position-absolute top-50 start-50 translate-middle w-100">
       <div class="d-flex flex-column justify-content-center align-items-center text-center">
         <h1 class="mihi-title display-2 fw-normal" style="letter-spacing: 2px">Mihi Biblie</h1>
 
@@ -84,7 +85,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <div id="chevronLeft" class="position-sticky top-50 start-0 translate-middle-y p-3 d-none">
+      <div id="prevBtn" class="position-sticky top-50 start-0 translate-middle-y p-3 d-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -98,14 +99,14 @@
         </svg>
       </div>
 
-      <div id="verses" class="w-100 h-100 overflow-y-auto my-1">
+      <div id="verses" class="h-100 overflow-y-auto my-1 shadow-sm p-3 rounded d-none">
         <span class="verseTemplate d-none">
-          <sup class="verse-number text-primary text-opacity-75 z-n1">1</sup>
+          <sup class="verse-number text-primary text-opacity-75 user-select-none z-n1">1</sup>
           <span class="verse-text fs-5"> Lorem ipsum dolor sit amet consectetur adipisicing elit... </span>
         </span>
       </div>
 
-      <div id="chevronRight" class="position-sticky top-50 end-0 translate-middle-y p-3 d-none">
+      <div id="nextBtn" class="position-sticky top-50 end-0 translate-middle-y p-3 d-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"

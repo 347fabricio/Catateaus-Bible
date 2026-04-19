@@ -1,8 +1,9 @@
+import { updateBookButton } from "../nav/books.js";
 import { buildVerses } from "./verses.js";
 
 export function pagination() {
-  const prevBtn = document.querySelector("#chevronLeft");
-  const nextBtn = document.querySelector("#chevronRight");
+  const prevBtn = document.querySelector("#prevBtn");
+  const nextBtn = document.querySelector("#nextBtn");
 
   const isPrevBtnShowing = prevBtn.classList.contains("d-none");
   const isNextBtnShowing = nextBtn.classList.contains("d-none");
@@ -16,6 +17,7 @@ export function pagination() {
   addOpacityEffect(nextBtn);
   setupPaginationControls();
 }
+
 /**
  * Adiciona um efeito visual de clique alterando a opacidade de um ícone SVG.
  * A opacidade aumenta, e o tamanho diminui ao pressionar o mouse. Retorna ao estado inicial ao soltar o elemento.
@@ -34,22 +36,25 @@ function addOpacityEffect(element) {
  * Lê o estado atual (livro e capítulo) a partir dos atributos `data-book-id` e `data-chapter-id`, calcula o próximo capítulo a ser exibido e aciona a renderização com um efeito visual de transição suave (fade).
  */
 async function setupPaginationControls() {
-  const prevBtn = document.querySelector("#chevronLeft");
-  const nextBtn = document.querySelector("#chevronRight");
+  const prevBtn = document.querySelector("#prevBtn");
+  const nextBtn = document.querySelector("#nextBtn");
   const booksEl = document.querySelector("#books");
   const versesDiv = document.querySelector("#verses");
 
   prevBtn.addEventListener("click", async () => {
     const currentBookId = parseInt(booksEl.dataset.bookId);
-    let currentChapterId = parseInt(booksEl.dataset.chapterId);
+    const currentChapterId = parseInt(booksEl.dataset.chapterId);
+
+    if (currentChapterId == 1) return;
 
     const nextChapterId = currentChapterId - 1;
+
+    const bookName = booksEl.dataset.bookName;
+    updateBookButton(booksEl, bookName, nextChapterId);
 
     booksEl.dataset.chapterId = nextChapterId;
 
     versesDiv.classList.add("opacity-0");
-
-    console.log(currentBookId, nextChapterId);
 
     setTimeout(async () => {
       await buildVerses(currentBookId, nextChapterId);
@@ -59,9 +64,15 @@ async function setupPaginationControls() {
 
   nextBtn.addEventListener("click", () => {
     const currentBookId = parseInt(booksEl.dataset.bookId);
-    let currentChapterId = parseInt(booksEl.dataset.chapterId);
+    const currentChapterId = parseInt(booksEl.dataset.chapterId);
+    const howManyChapters = parseInt(booksEl.dataset.maxChapters);
+
+    if (currentChapterId === howManyChapters) return;
 
     const nextChapterId = currentChapterId + 1;
+
+    const bookName = booksEl.dataset.bookName;
+    updateBookButton(booksEl, bookName, nextChapterId);
 
     booksEl.dataset.chapterId = nextChapterId;
 

@@ -2,6 +2,7 @@ import { buildVerses } from "../verses/verses.js";
 import { getChapter, getChapters } from "../../services/api.js";
 import { pagination } from "../verses/pagination.js";
 import { pushChapters } from "../../services/localStorage.js";
+import { updateBookButton } from "./books.js";
 
 /**
  * Adiciona ouvintes de eventos (event listeners) aos botões de capítulos gerados dinamicamente.
@@ -16,7 +17,7 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
     btn.addEventListener("click", (e) => {
       const chapterId = e.target.textContent.trim();
       booksEl.dataset.chapterId = chapterId;
-      booksEl.querySelector("button").textContent = `${bookName} ${chapterId}`;
+      updateBookButton(booksEl, bookName, chapterId);
 
       const dropdownToggle = booksEl.querySelector(".dropdown-toggle");
       const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownToggle);
@@ -38,7 +39,7 @@ export function setupChapterSelection(chaptersEl, booksEl, bookName) {
 }
 
 function HideWelcomeScreen() {
-  const welcomeScr = document.querySelector("#welcome-screen");
+  const welcomeScr = document.querySelector("#welcomeScreen");
   welcomeScr.classList.add("d-none");
 }
 
@@ -52,6 +53,8 @@ function HideWelcomeScreen() {
 export async function fetchAndRenderChapters(bookId, bookName, chaptersEl, booksEl) {
   const response = await getChapter(bookId, 999);
   const howManyChapters = response[0].chapter;
+
+  booksEl.dataset.maxChapters = howManyChapters;
 
   await getChapters(bookId);
 
@@ -88,4 +91,15 @@ export function clearChapters(chaptersEl) {
   const cols = chaptersEl.querySelectorAll(".col");
   const toRemove = [...cols].slice(1);
   toRemove.forEach((x) => x.remove());
+}
+
+/**
+ * Armazena o limite máximo de capítulos do livro atualmente selecionado.
+ * O valor é salvo no atributo `data-max-chapters` do elemento HTML para ser
+ * utilizado na lógica de paginação (evitando avançar além do último capítulo).
+ * @param {HTMLElement} booksEl - O contêiner principal do componente de livros.
+ * @param {number} howManyChapters - A quatidade total de capítulos de um livro.
+ */
+function setMaxChapters(booksEl, howManyChapters) {
+  booksEl.dataset.maxChapters = howManyChapters;
 }

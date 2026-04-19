@@ -8,22 +8,22 @@ body {
 }
 
 #chevronDiv,
-#chevronLeft,
-#chevronRight {
+#prevBtn,
+#nextBtn {
   cursor: pointer;
   width: fit-content;
   height: fit-content;
 }
 
-#chevronLeft svg,
-#chevronRight svg {
+#prevBtn svg,
+#nextBtn svg {
   transition:
     transform 0.1s ease,
     opacity 0.1s ease;
 }
 
-#chevronLeft:active svg,
-#chevronRight:active svg {
+#prevBtn:active svg,
+#nextBtn:active svg {
   transform: scale(0.9);
 }
 
@@ -63,8 +63,6 @@ body {
 }
 
 #verses {
-  margin-right: auto;
-  margin-left: auto;
   max-width: 720px;
 }
 
